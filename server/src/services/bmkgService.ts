@@ -1,6 +1,7 @@
 import axios from "axios";
 import db from "../database/db";
 import { Earthquake } from "../database/schema";
+import { upsertEarthquake, SupabaseEarthquake } from "../database/supabase";
 
 const BMKG_BASE_URL = "https://data.bmkg.go.id";
 
@@ -26,7 +27,7 @@ interface BMKGResponse {
 }
 
 /**
- * Parse BMKG earthquake data and insert into database
+ * Parse BMKG earthquake data and insert into database (SQLite + Supabase)
  */
 function parseAndInsertEarthquake(data: BMKGEarthquake): void {
   try {
@@ -48,15 +49,10 @@ function parseAndInsertEarthquake(data: BMKGEarthquake): void {
     // Convert datetime to timestamp
     const datetime = `${data.Tanggal} ${data.Jam}`;
     const timestamp = new Date(data.DateTime).getTime();
+    const created_at = Date.now();
 
-    // Prepare insert statement
-    const insert = db.prepare(`
-      INSERT OR REPLACE INTO earthquakes 
-      (id, datetime, timestamp, magnitude, depth, latitude, longitude, region, tsunami_potential, felt_status, shakemap_url)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    insert.run(
+    // Prepare earthquake object
+    const earthquakeData = {
       id,
       datetime,
       timestamp,
@@ -64,11 +60,39 @@ function parseAndInsertEarthquake(data: BMKGEarthquake): void {
       depth,
       latitude,
       longitude,
-      data.Wilayah,
-      data.Potensi || null,
-      data.Dirasakan || null,
-      data.Shakemap ? `${BMKG_BASE_URL}/${data.Shakemap}` : null
+      region: data.Wilayah,
+      tsunami_potential: data.Potensi || null,
+      felt_status: data.Dirasakan || null,
+      shakemap_url: data.Shakemap ? `${BMKG_BASE_URL}/${data.Shakemap}` : null,
+      created_at,
+    };
+
+    // Insert into SQLite
+    const insert = db.prepare(`
+      INSERT OR REPLACE INTO earthquakes 
+      (id, datetime, timestamp, magnitude, depth, latitude, longitude, region, tsunami_potential, felt_status, shakemap_url, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    insert.run(
+      earthquakeData.id,
+      earthquakeData.datetime,
+      earthquakeData.timestamp,
+      earthquakeData.magnitude,
+      earthquakeData.depth,
+      earthquakeData.latitude,
+      earthquakeData.longitude,
+      earthquakeData.region,
+      earthquakeData.tsunami_potential,
+      earthquakeData.felt_status,
+      earthquakeData.shakemap_url,
+      earthquakeData.created_at
     );
+
+    // Also insert into Supabase (async, non-blocking)
+    upsertEarthquake(earthquakeData as SupabaseEarthquake).catch((error) => {
+      console.error(`⚠️  Supabase sync failed for ${id}:`, error);
+    });
 
     console.log(`✅ Inserted earthquake: M${magnitude} - ${data.Wilayah}`);
   } catch (error) {
