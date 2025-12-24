@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cron from "node-cron";
-import { initializeDatabase } from "./database/schema";
+import { isSupabaseAvailable } from "./database/supabase";
 import { fetchAllEarthquakes } from "./services/bmkgService";
 import earthquakesRouter from "./routes/earthquakes";
 
@@ -16,8 +16,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Initialize database
-initializeDatabase();
+// Check Supabase configuration
+if (!isSupabaseAvailable()) {
+  console.error("❌ Supabase is not configured! Please check your .env file.");
+  console.error("Required: SUPABASE_URL and SUPABASE_ANON_KEY");
+  process.exit(1);
+}
+
+console.log("✅ Supabase connected successfully");
 
 // Initial fetch
 console.log("🚀 Starting initial earthquake data fetch...");
@@ -36,6 +42,7 @@ app.get("/", (req, res) => {
     message: "Earthquake Early Warning API - Indonesia",
     version: "1.0.0",
     dataSource: "BMKG Indonesia",
+    database: "Supabase",
     endpoints: {
       earthquakes: "/api/earthquakes",
       latest: "/api/earthquakes/latest",
@@ -69,5 +76,6 @@ app.listen(PORT, () => {
   console.log(`\n🌍 Earthquake Early Warning Server`);
   console.log(`📡 Server running on http://localhost:${PORT}`);
   console.log(`🔄 Auto-fetch interval: ${fetchInterval} minutes`);
-  console.log(`📊 Data source: BMKG Indonesia\n`);
+  console.log(`📊 Data source: BMKG Indonesia`);
+  console.log(`💾 Database: Supabase\n`);
 });

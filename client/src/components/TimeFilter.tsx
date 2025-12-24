@@ -19,15 +19,15 @@ export function TimeFilter({
   onFilterChange,
 }: TimeFilterProps) {
   return (
-    <div className="flex items-center justify-center fixed top-6 left-1/2 -translate-x-1/2 z-40 w-1/2 mx-4 animate-fade-in">
+    <div className="flex items-center justify-center fixed top-6 left-1/2 -translate-x-1/2 z-40 w-full mx-4 animate-fade-in">
       <div className="card bg-base-100 shadow-lg border border-base-300">
         <div className="card-body p-2">
-          <div className="btn-group">
+          <div className="flex grid grid-cols-2 items-center justify-center gap-4 btn-group">
             {filterOptions.map((option) => (
               <button
                 key={option.value}
                 onClick={() => onFilterChange(option.value)}
-                className={`btn btn-sm gap-4 ${
+                className={`btn btn-sm ${
                   selectedFilter === option.value ? "btn-info" : "btn-outline"
                 }`}
               >
