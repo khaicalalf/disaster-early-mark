@@ -69,9 +69,8 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
       <div className="card w-full max-w-md bg-base-100 shadow-lg border border-base-300">
         <div className="card-body">
           <div className="text-center space-y-2 mb-4">
-            <div className="text-6xl mb-2">🌍</div>
             <h2 className="card-title text-3xl justify-center">
-              Selamat Datang!
+              🌍 Selamat Datang!
             </h2>
             <p className="text-base-content/70">
               Atur lokasi Anda untuk menerima notifikasi gempa bumi di sekitar
@@ -124,7 +123,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
               <button
                 onClick={handleUseMyLocation}
                 disabled={loading}
-                className="btn btn-primary w-full"
+                className="btn btn-info w-full"
               >
                 {loading ? (
                   <>
@@ -138,7 +137,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
 
               <button
                 onClick={() => setManualMode(true)}
-                className="btn btn-outline btn-primary w-full"
+                className="btn btn-outline btn-info w-full"
               >
                 ✏️ Input Manual
               </button>
@@ -151,7 +150,9 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
             <form onSubmit={handleManualSubmit} className="space-y-4">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold">Latitude</span>
+                  <span className="label-text font-semibold">
+                    Latitude(-6.2088 (Jakarta))
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -166,7 +167,9 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-semibold">Longitude</span>
+                  <span className="label-text font-semibold">
+                    Longitude(106.8456 (Jakarta))
+                  </span>
                 </label>
                 <input
                   type="number"
@@ -205,7 +208,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
                 >
                   ← Kembali
                 </button>
-                <button type="submit" className="btn btn-primary flex-1">
+                <button type="submit" className="btn btn-info flex-1">
                   Simpan ✓
                 </button>
               </div>

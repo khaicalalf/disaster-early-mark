@@ -221,7 +221,7 @@ export function LocationSettings({
               type="button"
               onClick={handleUseMyLocation}
               disabled={loading}
-              className="btn btn-outline btn-primary w-full"
+              className="btn btn-outline btn-info w-full"
             >
               {loading ? (
                 <>
@@ -251,7 +251,7 @@ export function LocationSettings({
               >
                 Batal
               </button>
-              <button type="submit" className="btn btn-primary flex-1">
+              <button type="submit" className="btn btn-info flex-1">
                 Simpan Perubahan
               </button>
             </div>

@@ -112,10 +112,7 @@ function App() {
                   <h2 className="text-2xl font-bold">Terjadi Kesalahan</h2>
                   <p className="opacity-70 mt-2">{error}</p>
                 </div>
-                <button
-                  onClick={refresh}
-                  className="btn btn-primary btn-outline"
-                >
+                <button onClick={refresh} className="btn btn-info btn-outline">
                   🔄 Coba Lagi
                 </button>
               </div>
