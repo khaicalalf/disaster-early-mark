@@ -14,11 +14,16 @@ Aplikasi peringatan dini gempa bumi untuk Indonesia dengan visualisasi peta real
 
 ## 🚀 Setup
 
-### Server (Express.js + SQLite)
+### Server (Express.js + Supabase)
 
 ```bash
 cd server
 npm install
+
+# Setup environment variables
+cp .env.example .env
+# Edit .env and add your Supabase credentials
+
 npm run dev
 ```
 
@@ -80,7 +85,7 @@ Data gempa bumi berasal dari **BMKG Indonesia**:
 ### Server
 
 - Express.js
-- SQLite (better-sqlite3)
+- Supabase (PostgreSQL)
 - TypeScript
 - node-cron (scheduled fetching)
 - axios
@@ -97,11 +102,16 @@ Data gempa bumi berasal dari **BMKG Indonesia**:
 
 Server `.env`:
 
-```
+```env
 PORT=3000
-DATABASE_PATH=./data/earthquakes.db
 FETCH_INTERVAL=5
+
+# Supabase Configuration
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+**Catatan**: Pastikan Anda sudah membuat tabel `earthquakes` di Supabase dengan struktur yang sesuai.
 
 ## ⚠️ Browser Permissions
 

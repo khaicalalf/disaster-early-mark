@@ -1,73 +1,129 @@
-# React + TypeScript + Vite
+# Earthquake Early Warning System - Indonesia 🌍
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi peringatan dini gempa bumi untuk Indonesia dengan visualisasi peta real-time dan notifikasi berbasis lokasi menggunakan data dari BMKG (Badan Meteorologi, Klimatologi, dan Geofisika).
 
-Currently, two official plugins are available:
+## ✨ Fitur
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🗺️ **Peta Interaktif**: Visualisasi gempa bumi real-time di peta Indonesia
+- 📍 **Notifikasi Berbasis Lokasi**: Dapatkan peringatan saat gempa terjadi di sekitar Anda
+- 🔔 **Browser Notifications**: Notifikasi otomatis melalui browser
+- 📊 **Data Real-time**: Update otomatis setiap 5 menit dari API BMKG
+- 🎯 **Marker Color-coded**: Warna berdasarkan magnitude (hijau, kuning, oranye, merah)
+- 📱 **Responsive Design**: Tampilan optimal di desktop dan mobile
+- ⚡ **Pulse Animation**: Animasi untuk gempa yang baru terjadi (<1 jam)
 
-## React Compiler
+## 🚀 Setup
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Server (Express.js + Supabase)
 
-## Expanding the ESLint configuration
+```bash
+cd server
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Setup environment variables
+cp .env.example .env
+# Edit .env and add your Supabase credentials
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Server akan berjalan di `http://localhost:3000`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Client (React TypeScript)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd client
+npm install
+npm run dev
 ```
+
+Client akan berjalan di `http://localhost:5173`
+
+## 📡 API Endpoints
+
+- `GET /api/earthquakes` - Semua gempa dengan pagination
+- `GET /api/earthquakes/latest` - Gempa terbaru
+- `GET /api/earthquakes/nearby?lat=&lng=&radius=` - Gempa di sekitar lokasi
+- `GET /api/earthquakes/stats` - Statistik gempa
+- `GET /api/earthquakes/:id` - Detail gempa spesifik
+
+## 🎯 Cara Penggunaan
+
+1. **Setup Lokasi**: Saat pertama kali membuka aplikasi, Anda akan diminta untuk:
+
+   - Menggunakan lokasi otomatis (geolocation), atau
+   - Input koordinat manual
+   - Pilih radius notifikasi (50km, 100km, 200km, 500km)
+
+2. **Aktifkan Notifikasi**: Izinkan browser untuk mengirim notifikasi agar mendapat peringatan gempa
+
+3. **Lihat Peta**:
+
+   - Marker gempa ditampilkan dengan warna sesuai magnitude
+   - Klik marker untuk melihat detail
+   - Gunakan sidebar untuk melihat daftar gempa
+
+4. **Auto-refresh**: Data akan di-refresh otomatis setiap 5 menit
+
+## 🎨 Color Coding
+
+- 🟢 **Hijau**: Magnitude < 5.0
+- 🟡 **Kuning**: Magnitude 5.0 - 5.9
+- 🟠 **Oranye**: Magnitude 6.0 - 6.9
+- 🔴 **Merah**: Magnitude ≥ 7.0
+
+## 📊 Sumber Data
+
+Data gempa bumi berasal dari **BMKG Indonesia**:
+
+- https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json
+- https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json
+- https://data.bmkg.go.id/DataMKG/TEWS/gempadirasakan.json
+
+## 🛠️ Tech Stack
+
+### Server
+
+- Express.js
+- Supabase (PostgreSQL)
+- TypeScript
+- node-cron (scheduled fetching)
+- axios
+
+### Client
+
+- React 19
+- TypeScript
+- Leaflet / React-Leaflet
+- Tailwind CSS
+- Vite
+
+## 📝 Environment Variables
+
+Server `.env`:
+
+```env
+PORT=3000
+FETCH_INTERVAL=5
+
+# Supabase Configuration
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+**Catatan**: Pastikan Anda sudah membuat tabel `earthquakes` di Supabase dengan struktur yang sesuai.
+
+## ⚠️ Browser Permissions
+
+Aplikasi memerlukan 2 permission:
+
+1. **Geolocation** (opsional) - untuk deteksi lokasi otomatis
+2. **Notifications** - untuk notifikasi gempa
+
+## 📄 License
+
+MIT
+
+## 🙏 Attribution
+
+Data gempa bumi disediakan oleh **BMKG Indonesia** (Badan Meteorologi, Klimatologi, dan Geofisika)
