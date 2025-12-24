@@ -13,7 +13,8 @@ dist-ssr
 *.local
 
 # Database
-data
+data/earthquakes.db-shm
+data/earthquakes.db-wal
 data/earthquakes.db
 
 # environment variables

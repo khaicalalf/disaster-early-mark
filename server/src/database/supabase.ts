@@ -9,7 +9,7 @@ const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
 let supabase: SupabaseClient | null = null;
 
 // Only initialize if credentials are provided
-if (supabaseUrl && supabaseKey && supabaseUrl !== "your_supabase_project_url") {
+if (supabaseUrl && supabaseKey) {
   supabase = createClient(supabaseUrl, supabaseKey);
   console.log("✅ Supabase client initialized");
 } else {
