@@ -5,8 +5,8 @@ import type {
   ApiResponse,
 } from "../types/earthquake";
 
-const API_BASE_URL =
-  "http://localhost:3000/api || https://express-test-1-virid.vercel.app/api";
+//http://localhost:3000/api || https://express-test-1-virid.vercel.app/api
+const API_BASE_URL = "https://express-test-1-virid.vercel.app/api";
 
 export async function fetchEarthquakes(params?: {
   limit?: number;
