@@ -20,7 +20,7 @@ export function TimeFilter({
 }: TimeFilterProps) {
   return (
     <div className="flex items-center justify-center fixed top-6 left-1/2 -translate-x-1/2 z-40 w-1/2 mx-4 animate-fade-in">
-      <div className="card bg-base-100 shadow-xl border border-base-300">
+      <div className="card bg-base-100 shadow-lg border border-base-300">
         <div className="card-body p-2">
           <div className="btn-group">
             {filterOptions.map((option) => (
@@ -28,7 +28,9 @@ export function TimeFilter({
                 key={option.value}
                 onClick={() => onFilterChange(option.value)}
                 className={`btn btn-sm ${
-                  selectedFilter === option.value ? "btn-primary" : "btn-ghost"
+                  selectedFilter === option.value
+                    ? "btn-primary"
+                    : "btn-outline"
                 }`}
               >
                 <span className="mr-1">{option.icon}</span>

@@ -82,14 +82,14 @@ export function LocationSettings({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="card w-full max-w-md bg-base-100 shadow-2xl">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="card w-full max-w-md bg-base-100 shadow-lg border border-base-300">
         <div className="card-body">
           <div className="flex justify-between items-center mb-4">
             <h2 className="card-title text-2xl">⚙️ Pengaturan Lokasi</h2>
             <button
               onClick={onClose}
-              className="btn btn-sm btn-circle btn-ghost"
+              className="btn btn-sm btn-circle btn-outline"
             >
               ✕
             </button>
@@ -221,7 +221,7 @@ export function LocationSettings({
               type="button"
               onClick={handleUseMyLocation}
               disabled={loading}
-              className="btn btn-outline w-full"
+              className="btn btn-outline btn-primary w-full"
             >
               {loading ? (
                 <>
@@ -237,7 +237,7 @@ export function LocationSettings({
               <button
                 type="button"
                 onClick={handleClearLocation}
-                className="btn btn-error btn-outline w-full"
+                className="btn btn-outline w-full text-error"
               >
                 🗑️ Hapus Lokasi (Tampilkan Semua Data)
               </button>
@@ -247,7 +247,7 @@ export function LocationSettings({
               <button
                 type="button"
                 onClick={onClose}
-                className="btn btn-ghost flex-1"
+                className="btn btn-outline flex-1"
               >
                 Batal
               </button>

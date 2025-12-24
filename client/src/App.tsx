@@ -85,8 +85,8 @@ function App() {
       {/* Map */}
       <div id="map" className="absolute inset-0">
         {loading && earthquakes.length === 0 ? (
-          <div className="h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
-            <div className="card bg-base-100 shadow-2xl p-8 max-w-sm">
+          <div className="h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-base-200">
+            <div className="card bg-base-100 shadow-lg border border-base-300 p-8 max-w-sm">
               <div className="text-center space-y-4">
                 <div className="relative">
                   <span className="loading loading-ring loading-lg text-primary"></span>
@@ -104,15 +104,18 @@ function App() {
             </div>
           </div>
         ) : error ? (
-          <div className="h-full flex items-center justify-center bg-gradient-to-br from-error/10 to-warning/10">
-            <div className="card bg-base-100 shadow-2xl p-8 max-w-md mx-4">
+          <div className="h-full flex items-center justify-center bg-gradient-to-br from-error/5 to-base-200">
+            <div className="card bg-base-100 shadow-lg border border-base-300 p-8 max-w-md mx-4">
               <div className="text-center space-y-4">
                 <div className="text-error text-6xl">⚠️</div>
                 <div>
                   <h2 className="text-2xl font-bold">Terjadi Kesalahan</h2>
                   <p className="opacity-70 mt-2">{error}</p>
                 </div>
-                <button onClick={refresh} className="btn btn-primary">
+                <button
+                  onClick={refresh}
+                  className="btn btn-primary btn-outline"
+                >
                   🔄 Coba Lagi
                 </button>
               </div>
@@ -152,7 +155,7 @@ function App() {
       <div className="dropdown dropdown-top dropdown-end fixed bottom-6 right-24 z-30">
         <button
           tabIndex={0}
-          className="btn btn-circle btn-lg shadow-xl"
+          className="btn btn-circle btn-lg shadow-lg btn-outline"
           title="Menu"
         >
           <svg
@@ -262,7 +265,7 @@ function App() {
       {/* Refresh button */}
       <button
         onClick={refresh}
-        className="btn btn-circle btn-lg fixed bottom-6 right-6 z-30 shadow-xl"
+        className="btn btn-circle btn-lg fixed bottom-6 right-6 z-30 shadow-lg btn-outline"
         title="Refresh data"
       >
         <svg

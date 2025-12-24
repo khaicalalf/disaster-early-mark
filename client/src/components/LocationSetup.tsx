@@ -65,8 +65,8 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="card w-full max-w-md bg-base-100 shadow-2xl">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="card w-full max-w-md bg-base-100 shadow-lg border border-base-300">
         <div className="card-body">
           <div className="text-center space-y-2 mb-4">
             <div className="text-6xl mb-2">🌍</div>
@@ -138,7 +138,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
 
               <button
                 onClick={() => setManualMode(true)}
-                className="btn btn-outline w-full"
+                className="btn btn-outline btn-primary w-full"
               >
                 ✏️ Input Manual
               </button>

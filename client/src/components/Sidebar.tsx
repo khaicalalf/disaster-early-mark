@@ -41,7 +41,7 @@ export function Sidebar({
       {/* Toggle button */}
       <button
         onClick={onToggle}
-        className="btn btn-circle btn-lg fixed top-6 left-6 z-60 shadow-xl"
+        className="btn btn-circle btn-lg fixed top-6 left-6 z-60 shadow-lg btn-outline"
         title={isOpen ? "Tutup sidebar" : "Buka sidebar"}
       >
         <svg
@@ -70,7 +70,7 @@ export function Sidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full bg-base-100 shadow-2xl z-50 transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 h-full bg-base-100 shadow-lg border-r border-base-300 z-50 transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ width: "380px" }}

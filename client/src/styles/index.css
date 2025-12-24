@@ -2,6 +2,15 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@theme {
+  --color-primary: oklch(0.7 0.15 195); /* Cyan */
+  --color-primary-content: oklch(1 0 0); /* White */
+  --color-base-100: oklch(1 0 0); /* White */
+  --color-base-200: oklch(0.97 0 0); /* Light gray */
+  --color-base-300: oklch(0.9 0 0); /* Gray */
+  --color-base-content: oklch(0.2 0 0); /* Dark gray/black */
+}
+
 /* Ensure full height layout */
 html,
 body,
