@@ -169,8 +169,7 @@ export function LocationSettings({
                 <span className="label-text font-semibold">Latitude</span>
               </label>
               <input
-                type="number"
-                step="any"
+                type="text"
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
                 placeholder="-6.2088 (Jakarta)"
@@ -184,8 +183,7 @@ export function LocationSettings({
                 <span className="label-text font-semibold">Longitude</span>
               </label>
               <input
-                type="number"
-                step="any"
+                type="text"
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
                 placeholder="106.8456 (Jakarta)"
@@ -221,7 +219,7 @@ export function LocationSettings({
               type="button"
               onClick={handleUseMyLocation}
               disabled={loading}
-              className="btn btn-outline btn-info w-full"
+              className="btn btn-outline bg-cyan-600 w-full"
             >
               {loading ? (
                 <>
@@ -251,7 +249,7 @@ export function LocationSettings({
               >
                 Batal
               </button>
-              <button type="submit" className="btn btn-info flex-1">
+              <button type="submit" className="btn bg-cyan-600 flex-1">
                 Simpan Perubahan
               </button>
             </div>

@@ -19,7 +19,7 @@ export function NotificationPrompt({
           </p>
         </div>
         <div className="flex gap-2">
-          <button onClick={onEnable} className="btn btn-info btn-sm">
+          <button onClick={onEnable} className="btn bg-cyan-600 btn-sm">
             Aktifkan
           </button>
           <button onClick={onDismiss} className="btn btn-outline btn-sm">

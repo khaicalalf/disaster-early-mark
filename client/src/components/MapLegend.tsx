@@ -4,7 +4,6 @@ export function MapLegend() {
       <div className="card bg-base-100 shadow-lg border border-base-300 w-48">
         <div className="card-body p-4">
           <h3 className="font-bold text-sm mb-3 flex items-center gap-2">
-            <span>📊</span>
             <span>Skala Magnitude</span>
           </h3>
           <div className="space-y-2 text-xs">

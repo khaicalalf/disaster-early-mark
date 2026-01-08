@@ -28,10 +28,11 @@ export function TimeFilter({
                 key={option.value}
                 onClick={() => onFilterChange(option.value)}
                 className={`btn btn-sm ${
-                  selectedFilter === option.value ? "btn-info" : "btn-outline"
+                  selectedFilter === option.value
+                    ? "bg-cyan-600 text-white/90"
+                    : "btn-outline"
                 }`}
               >
-                <span className="mr-1">{option.icon}</span>
                 {option.label}
               </button>
             ))}

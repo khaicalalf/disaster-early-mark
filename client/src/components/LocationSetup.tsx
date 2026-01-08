@@ -70,7 +70,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
         <div className="card-body">
           <div className="text-center space-y-2 mb-4">
             <h2 className="card-title text-3xl justify-center">
-              🌍 Selamat Datang!
+              Selamat Datang!
             </h2>
             <p className="text-base-content/70">
               Atur lokasi Anda untuk menerima notifikasi gempa bumi di sekitar
@@ -123,7 +123,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
               <button
                 onClick={handleUseMyLocation}
                 disabled={loading}
-                className="btn btn-info w-full"
+                className="btn bg-cyan-600 w-full text-white/90"
               >
                 {loading ? (
                   <>
@@ -137,9 +137,9 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
 
               <button
                 onClick={() => setManualMode(true)}
-                className="btn btn-outline btn-info w-full"
+                className="btn btn-outline w-full"
               >
-                ✏️ Input Manual
+                Input Manual
               </button>
 
               <button onClick={onSkip} className="btn btn-ghost btn-sm w-full">
@@ -208,7 +208,7 @@ export function LocationSetup({ onComplete, onSkip }: LocationSetupProps) {
                 >
                   ← Kembali
                 </button>
-                <button type="submit" className="btn btn-info flex-1">
+                <button type="submit" className="btn bg-cyan-600 flex-1">
                   Simpan ✓
                 </button>
               </div>

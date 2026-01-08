@@ -41,7 +41,9 @@ export function Sidebar({
       {/* Toggle button */}
       <button
         onClick={onToggle}
-        className="btn btn-circle btn-lg fixed top-6 left-6 z-60 shadow-lg btn-outline"
+        className={`btn btn-circle btn-lg fixed  z-60 shadow-lg btn-outline ${
+          isOpen ? "top-4 left-4" : "top-4 right-4"
+        }`}
         title={isOpen ? "Tutup sidebar" : "Buka sidebar"}
       >
         <svg
@@ -77,9 +79,8 @@ export function Sidebar({
       >
         <div className="h-full flex flex-col">
           {/* Header */}
-          <div className="p-6 border-b border-base-300 bg-gradient-to-br from-primary/10 to-transparent">
+          <div className="p-6 border-b border-base-300 bg-gradient-to-br from-primary/10 to-transparent w-full flex flex-col justify-end items-end">
             <div className="flex items-center gap-3 mb-2">
-              <div className="text-3xl">🌍</div>
               <h2 className="text-2xl font-bold">Gempa Terkini</h2>
             </div>
             {lastUpdate && (
